@@ -13,14 +13,14 @@
 
 <div class="flex gap-4">
     <div>
-        <span class="countdown font-mono text-6xl">
-            <span style="--value:{formatTime(countdown).minutes};"></span>
+        <span class="font-mono text-6xl">
+            <span class="timer-minutes">{formatTime(countdown).minutes}</span>
         </span>
         min
     </div>
     <div>
-        <span class="countdown font-mono text-6xl">
-            <span style="--value:{formatTime(countdown).seconds};"></span>
+        <span class="font-mono text-6xl">
+            <span class="timer-seconds">{formatTime(countdown).seconds}</span>
         </span>
         sec
     </div>
