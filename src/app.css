@@ -1,3 +1,99 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Bloco: Challenge */
+.challenge {
+    @apply flex flex-col items-center p-4 bg-white w-full;
+}
+
+.challenge__timer-label {
+    @apply text-lg;
+}
+
+.challenge__indicator {
+    @apply mt-4 absolute right-8 top-4;
+}
+
+.challenge__indicator-badge {
+    @apply indicator-item badge badge-primary absolute -right-2 -top-2;
+}
+
+.challenge__indicator-button {
+    @apply btn btn-active;
+}
+
+.challenge__title {
+    @apply text-2xl font-bold my-2;
+}
+
+/* Bloco: Form */
+.challenge__form {
+    @apply space-y-4 w-full max-w-md;
+}
+
+.challenge__form-group {
+    @apply relative mb-4;
+}
+
+.challenge__form-icon {
+    @apply absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none;
+}
+
+.challenge__form-icon img {
+    @apply w-5 h-5;
+}
+
+.challenge__form-input {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5;
+}
+
+.challenge__form-actions {
+    @apply flex justify-between gap-4;
+}
+
+.challenge__form-button {
+    @apply w-full px-6 py-2 text-center text-white bg-blue-500 border border-blue-500 rounded-lg transition-colors;
+}
+
+.challenge__form-button:hover {
+    @apply bg-transparent text-blue-500;
+}
+
+.challenge__form-button--submit {
+    @apply bg-transparent text-blue-500 border-blue-500;
+}
+
+.challenge__form-button--submit:hover {
+    @apply bg-blue-500 text-white;
+}
+
+/* Bloco: Modal (se necessário) */
+.modal {
+    @apply fixed inset-0 flex items-center justify-center bg-black bg-opacity-50;
+}
+
+.modal__box {
+    @apply bg-white p-8 rounded-lg max-w-md w-full text-center;
+}
+
+.modal__message {
+    @apply text-xl mb-6;
+}
+
+.modal__close-button {
+    @apply px-4 py-2 text-white bg-blue-500 rounded-lg transition-colors;
+}
+
+.modal__close-button:hover {
+    @apply bg-blue-600;
+}
+
+.modal--success .modal__message {
+    @apply text-green-500;
+}
+
+.modal--failure .modal__message {
+    @apply text-red-500;
+}
+
