@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-interface CandidateState {
+export interface Candidate {
     name: string;
     phone: string;
     email: string;
@@ -9,7 +9,7 @@ interface CandidateState {
     showCandidatePage: boolean;
 }
 
-export const candidateStore = writable<CandidateState>({
+export const candidateStore = writable<Candidate>({
     name: '',
     phone: '',
     email: '',
