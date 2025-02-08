@@ -6,7 +6,7 @@
 </script>
 
 {#if showModal}
-<dialog class="modal modal-open" aria-labelledby="modal-title" aria-describedby="modal-description">
+<dialog class="modal modal-open" aria-labelledby="modal-title" aria-describedby="modal-description" aria-live="polite">
     <div class="modal-box" role="dialog" aria-modal="true">
         {#if sucessModal}
             <img src="/icon_sucess.png" alt="Ícone de sucesso" class="w-20 h-20 mx-auto" />
