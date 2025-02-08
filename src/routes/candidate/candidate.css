@@ -1,0 +1,49 @@
+/* Bloco: Candidate */
+.candidate {
+    @apply flex flex-col justify-center items-center h-screen bg-gradient-to-r from-cyan-500 to-blue-500;
+}
+
+.candidate__title {
+    @apply text-2xl font-bold mb-4 text-white;
+}
+
+.candidate__card {
+    @apply bg-white w-96 shadow-xl rounded-lg flex flex-col items-center p-6;
+}
+
+.candidate__avatar {
+    @apply mt-6;
+}
+
+.candidate__avatar-icon {
+    @apply bg-gray-300 flex justify-center items-center w-[150px] h-[150px] rounded-full;
+}
+
+.candidate__avatar-text {
+    @apply text-4xl font-bold text-gray-700;
+}
+
+.candidate__info {
+    @apply text-center mt-4;
+}
+
+.candidate__name {
+    @apply text-xl font-bold text-gray-800;
+}
+
+.candidate__phone,
+.candidate__email {
+    @apply text-gray-600;
+}
+
+.candidate__actions {
+    @apply mt-6;
+}
+
+.candidate__button {
+    @apply btn btn-active bg-blue-500 text-white hover:bg-blue-600 transition-colors;
+}
+
+.candidate__message {
+    @apply text-center mt-10 text-xl text-white;
+}
