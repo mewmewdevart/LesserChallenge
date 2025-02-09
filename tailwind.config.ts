@@ -10,6 +10,7 @@ export default {
 			colors: {
 				'custom-purple': '#A073B0',
 				'custom-blue': '#3B82F6',
+				'custom-orange': '#EF9629',
 			},
 			keyframes: {
 				fly: {

@@ -201,9 +201,10 @@
     {/if}
 
     {#if isCandidatePageVisible && !isChallengeStarted && buttonText === "Reiniciar Desafio"}
-        <p class="challenge__timer-label">Desafio concluído em:</p>
-        <p>{formatTime(previousCountdown).minutes}:{formatTime(previousCountdown).seconds}</p>
-    {/if}
+    <p class="challenge__timer-label">⏱️ Desafio concluido em :</p>
+    <p>{formatTime(previousCountdown).minutes}:{formatTime(previousCountdown).seconds}</p>
+{/if}
+
 
     <div class="challenge__indicator">
         {#if isCandidatePageVisible}
@@ -216,9 +217,9 @@
     {#if !isChallengeStarted && buttonText === "Iniciar Desafio"}
         <div class="mx-auto max-w-7xl mb-4">
             <p>
-                Bem-vindo, cadete! Você foi selecionado para integrar a próxima expedição intergaláctica. No
+                Bem-vindo, convidado(cadete)! Você foi selecionado para integrar a próxima expedição intergaláctica. No
                 entanto, antes de embarcar, sua identidade precisa ser registrada no sistema de bordo da nave
-                estelar <strong> Orion-X </strong>.
+                estelar <strong> Lesser-X </strong>.
             </p>
             <div class="rounded-lg bg-yellow-50 p-4 text-sm text-yellow-800 dark:bg-gray-800 dark:text-yellow-300">
                 <p>
@@ -246,7 +247,7 @@
                     </li>
                 </ul>
             </div>
-            <p class="good-luck">Boa sorte, astronauta! 🌌🚀</p>
+            <p class="good-luck">Boa sorte, cadete! 🌌🚀</p>
         </div>
     {/if}
 

@@ -16,7 +16,7 @@
 }
 
 .challenge__indicator-badge {
-    @apply indicator-item badge badge-primary absolute -right-2 -top-2;
+    @apply indicator-item badge bg-custom-orange border-none absolute -right-2 -top-2;
 }
 
 

@@ -8,7 +8,7 @@
 }
 
 .candidate__card {
-    @apply bg-white w-96 shadow-xl rounded-lg flex flex-col items-center p-6 z-50;
+    @apply bg-white w-96 shadow-xl rounded-lg flex flex-col items-center p-6 z-40;
 }
 
 .candidate__avatar {
@@ -16,7 +16,7 @@
 }
 
 .candidate__avatar-icon {
-    @apply bg-gray-300 flex justify-center items-center w-[150px] h-[150px] rounded-full;
+    @apply bg-gray-300 flex justify-center items-center w-[150px] h-[150px] rounded-full border-[20px] border-custom-orange;
 }
 
 .candidate__avatar-text {
@@ -49,5 +49,5 @@
 }
 
 .candidate__message-container {
-    @apply z-50 text-center;
+    @apply z-40 text-center;
 }
