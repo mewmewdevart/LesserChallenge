@@ -1,11 +1,10 @@
 <script lang="ts">
     import '../app.css';
-    import Header from '$components/header/Header.svelte';
-    export let isModalVisible: boolean = false;
+    import Header from '$components/Header/Header.svelte';
 </script>
 
 <div class="flex flex-col min-h-screen">
-    <Header showModal={isModalVisible} />
+    <Header />
     
     <main class="flex-1 bg-white">
         <slot />
