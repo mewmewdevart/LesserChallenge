@@ -2,9 +2,10 @@
     import { goto } from '$app/navigation';
     import { onMount, onDestroy } from 'svelte';
     import { browser } from '$app/environment';
-    import { candidateStore } from '../stores/candidateStore';
-    import Timer from '$components/Timer.svelte';
-    import Modal from '$components/Modal.svelte';
+    
+    import { candidateStore } from '$stores/candidateStore';
+    import Timer from '$components/Timer/Timer.svelte';
+    import Modal from '$components/Modal/Modal.svelte';
 
     const INITIAL_COUNTDOWN = 15;
 
@@ -17,6 +18,7 @@
     let isChallengeStarted: boolean = false;
     let modalMessage: string = '';
     let isModalVisible: boolean = false;
+    let showPreviousCountdown: boolean = false;
     let buttonText: string = 'Iniciar Desafio';
     let isCandidatePageVisible: boolean = false;
     let isSuccessModal: boolean = false;
@@ -34,6 +36,9 @@
         }
         if ($candidateStore.showCandidatePage !== undefined) {
             isCandidatePageVisible = $candidateStore.showCandidatePage;
+        }
+        if ($candidateStore.showPreviousCountdown !== undefined) {
+            showPreviousCountdown = $candidateStore.showPreviousCountdown;
         }
         if ($candidateStore.name || $candidateStore.phone || $candidateStore.email) {
             buttonText = 'Reiniciar Desafio';
@@ -76,6 +81,7 @@
         candidateName = '';
         candidatePhone = '';
         candidateEmail = '';
+        showPreviousCountdown = false;
         candidateStore.set({
             name: '',
             phone: '',
@@ -83,13 +89,13 @@
             countdown: INITIAL_COUNTDOWN,
             previousCountdown: 0,
             challengeStarted: false,
-            showCandidatePage: false
+            showCandidatePage: false,
+            showPreviousCountdown: false
         });
         buttonText = 'Iniciar Desafio';
     }
 
     function initiateNewChallenge() {
-        console.log('Iniciando novo desafio...');
         isChallengeStarted = true;
         buttonText = 'Reiniciar Desafio';
         isModalVisible = false;
@@ -97,7 +103,6 @@
         timer = setInterval(() => {
             if (countdown > 0) {
                 countdown--;
-                console.log(`Countdown: ${countdown}`);
                 candidateStore.update((state) => ({
                     ...state,
                     countdown,
@@ -108,7 +113,6 @@
                     showCandidatePage: state.showCandidatePage || false
                 }));
             } else {
-                console.log('Countdown chegou a zero.');
                 endChallenge(false);
             }
         }, 1000);
@@ -143,9 +147,11 @@
                 countdown,
                 previousCountdown,
                 challengeStarted: false,
+                showPreviousCountdown: true,
                 showCandidatePage: true
             });
             isCandidatePageVisible = true;
+            showPreviousCountdown = true;
         }
         isModalVisible = true;
         isChallengeStarted = false;
@@ -216,14 +222,8 @@
 </script>
 
 <div class="challenge">
-    {#if isChallengeStarted}
-        <p class="challenge__timer-label">Tempo restante:</p>
-        <Timer {countdown} />
-    {/if}
-
-    {#if !isChallengeStarted && buttonText === "Reiniciar Desafio"}
-        <p class="challenge__timer-label">⏱️ Desafio concluído em:</p>
-        <p>{formatTime(previousCountdown).minutes}:{formatTime(previousCountdown).seconds}</p>
+    {#if isChallengeStarted || showPreviousCountdown}
+        <Timer {countdown} {previousCountdown} {showPreviousCountdown}/>
     {/if}
 
     <div class="challenge__indicator">
@@ -244,7 +244,7 @@
             <div class="rounded-lg bg-yellow-50 p-4 text-sm text-yellow-800 dark:bg-gray-800 dark:text-yellow-300">
                 <p>
                     ⏳ <strong>Atenção!</strong> Você tem 15 segundos para preencher todos os campos corretamente
-                    do formulario e tem apenas uma chance para cada lançamento.
+                    do formulário e tem apenas uma chance para cada lançamento.
                 </p>
             </div>
             <div class="instructions">
