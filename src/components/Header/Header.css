@@ -1,0 +1,12 @@
+.header {
+    @apply w-full;
+}
+
+.header__container {
+    @apply relative flex flex-col items-center justify-center gap-5 w-full h-60 bg-gradient-to-r from-cyan-500 to-blue-500 text-white overflow-hidden;
+}
+
+.header__spaceship {
+    @apply absolute bottom-[-250px] left-1/2 -translate-x-1/2 w-[100px] animate-fly;
+}
+
