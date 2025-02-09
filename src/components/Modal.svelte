@@ -1,15 +1,15 @@
 <script lang="ts">
-    export let showModal: boolean;
-    export let sucessModal: boolean;
+    export let isModalVisible: boolean;
+    export let isSuccessModal: boolean;
     export let modalMessage: string;
     export let onClose: () => void;
 </script>
 
-{#if showModal}
+{#if isModalVisible}
 <dialog class="modal modal-open" aria-labelledby="modal-title" aria-describedby="modal-description" aria-live="polite">
     <div class="modal-box" role="dialog" aria-modal="true">
-        {#if sucessModal}
-            <img src="/icon_sucess.png" alt="Ícone de sucesso" class="w-20 h-20 mx-auto" />
+        {#if isSuccessModal}
+            <img src="/icon_success.png" alt="Ícone de sucesso" class="w-20 h-20 mx-auto" />
         {:else}
             <img src="/icon_fail.png" alt="Ícone de erro" class="w-20 h-20 mx-auto" />
         {/if}

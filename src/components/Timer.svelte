@@ -9,6 +9,8 @@
             seconds: String(remainingSeconds).padStart(2, '0'),
         };
     }
+
+    $: console.log(`Countdown atualizado: ${countdown}`);
 </script>
 
 <div class="flex gap-4">

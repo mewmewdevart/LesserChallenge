@@ -9,3 +9,4 @@
 .header__spaceship {
     @apply absolute bottom-[-250px] left-1/2 -translate-x-1/2 w-[100px] animate-fly;
 }
+

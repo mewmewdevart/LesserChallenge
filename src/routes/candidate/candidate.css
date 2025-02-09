@@ -1,6 +1,6 @@
 /* Bloco: Candidate */
 .candidate {
-    @apply flex flex-col justify-center items-center h-screen bg-gradient-to-r from-cyan-500 to-blue-500;
+    @apply flex flex-col items-center bg-gradient-to-r from-cyan-500 to-blue-500 h-[73vh];
 }
 
 .candidate__title {
@@ -8,11 +8,11 @@
 }
 
 .candidate__card {
-    @apply bg-white w-96 shadow-xl rounded-lg flex flex-col items-center p-6;
+    @apply bg-white w-96 shadow-xl rounded-lg flex flex-col items-center p-6 z-50;
 }
 
 .candidate__avatar {
-    @apply mt-6;
+    @apply mt-2;
 }
 
 .candidate__avatar-icon {
@@ -40,10 +40,14 @@
     @apply mt-6;
 }
 
-.candidate__button {
-    @apply btn btn-active bg-blue-500 text-white hover:bg-blue-600 transition-colors;
-}
-
 .candidate__message {
     @apply text-center mt-10 text-xl text-white;
+}
+
+.candidate__button  {
+    @apply mt-4 btn text-center rounded-lg bg-white text-custom-blue border-custom-blue transition-colors hover:bg-custom-blue hover:text-white;
+}
+
+.candidate__message-container {
+    @apply z-50 text-center;
 }

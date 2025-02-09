@@ -9,6 +9,7 @@ export default {
 		extend: {
 			colors: {
 				'custom-purple': '#A073B0',
+				'custom-blue': '#3B82F6',
 			},
 			keyframes: {
 				fly: {

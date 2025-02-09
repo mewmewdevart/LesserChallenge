@@ -6,6 +6,10 @@
     function goBack() {
         goto('/');
     }
+
+    function capitalizeFirstLetter(name: string): string {
+        return name.charAt(0).toUpperCase() + name.slice(1);
+    }
 </script>
 
 <div class="candidate">
@@ -14,11 +18,11 @@
         <div class="candidate__card">
             <div class="candidate__avatar">
                 <div class="candidate__avatar-icon">
-                    <p class="candidate__avatar-text">{$candidateStore.name?.charAt(0) || '?'}</p>
+                    <p class="candidate__avatar-text">{capitalizeFirstLetter($candidateStore.name?.charAt(0)) || '?'}</p>
                 </div>
             </div>
             <div class="candidate__info">
-                <h2 class="candidate__name">{$candidateStore.name || 'Usuário'}</h2>
+                <h2 class="candidate__name">{capitalizeFirstLetter($candidateStore.name) || 'Usuário'}</h2>
                 <p class="candidate__phone">{$candidateStore.phone || 'Telefone desconhecido'}</p>
                 <p class="candidate__email">{$candidateStore.email || 'Email desconhecido'}</p>
                 <div class="candidate__actions">
@@ -27,7 +31,9 @@
             </div>
         </div>
     {:else}
-        <p class="candidate__message">Por favor, finalize o desafio com sucesso para visualizar esta página.</p>
-        <button class="candidate__button" on:click={goBack}>Voltar para o Desafio</button>
+        <div class="candidate__message-container">
+            <p class="candidate__message">Por favor, finalize o desafio com sucesso para visualizar esta página.</p>
+            <button class="candidate__button" on:click={goBack}>Voltar para o Desafio</button>
+        </div>
     {/if}
 </div>

@@ -34,9 +34,9 @@ test.describe('Challenge Page', () => {
     test('Should correctly decrement the countdown timer every second', async ({ page }) => {
         await page.click('button:has-text("Iniciar Desafio")');
         await expect(page.locator('.timer-minutes')).toHaveText('00');
-        await expect(page.locator('.timer-seconds')).toHaveText('15'); // Timer starts at 15 seconds
-        await page.waitForTimeout(5000); // Wait for 5 seconds
-        await expect(page.locator('.timer-seconds')).toHaveText('10'); // Timer should be at 10 seconds
+        await expect(page.locator('.timer-seconds')).toHaveText('15');
+        await page.waitForTimeout(5000);
+        await expect(page.locator('.timer-seconds')).toHaveText('10');
     });
 
     test('Should show failure modal when the countdown reaches zero before form submission', async ({ page }) => {
@@ -75,5 +75,4 @@ test.describe('Challenge Page', () => {
         await page.click('button:has-text("Voltar para o Desafio")');
         await expect(page).toHaveURL('/');
     });
-
 });
