@@ -1,8 +1,8 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
-    import { candidateStore } from '../stores/candidateStore';
-    import { onDestroy } from 'svelte';
+    import { onMount, onDestroy } from 'svelte';
     import { browser } from '$app/environment';
+    import { candidateStore } from '../stores/candidateStore';
     import Timer from '$components/Timer.svelte';
     import Modal from '$components/Modal.svelte';
 
@@ -21,6 +21,25 @@
     let isCandidatePageVisible: boolean = false;
     let isSuccessModal: boolean = false;
 
+    // Restore state when the page loads
+    onMount(() => {
+        if ($candidateStore.countdown !== undefined) {
+            countdown = $candidateStore.countdown;
+        }
+        if ($candidateStore.previousCountdown !== undefined) {
+            previousCountdown = $candidateStore.previousCountdown;
+        }
+        if ($candidateStore.challengeStarted !== undefined) {
+            isChallengeStarted = $candidateStore.challengeStarted;
+        }
+        if ($candidateStore.showCandidatePage !== undefined) {
+            isCandidatePageVisible = $candidateStore.showCandidatePage;
+        }
+        if ($candidateStore.name || $candidateStore.phone || $candidateStore.email) {
+            buttonText = 'Reiniciar Desafio';
+        }
+    });
+
     function formatPhoneNumber(value: string): string {
         value = value.replace(/\D/g, '');
         if (value.length > 10) {
@@ -29,10 +48,6 @@
             value = value.replace(/^(\d{2})(\d{4})(\d{4}).*/, '($1) $2-$3');
         }
         return value;
-    }
-
-    $: if ($candidateStore?.name || $candidateStore?.phone || $candidateStore?.email) {
-        buttonText = 'Reiniciar Desafio';
     }
 
     function formatTime(seconds: number): { minutes: string; seconds: string } {
@@ -66,6 +81,7 @@
             phone: '',
             email: '',
             countdown: INITIAL_COUNTDOWN,
+            previousCountdown: 0,
             challengeStarted: false,
             showCandidatePage: false
         });
@@ -88,7 +104,7 @@
                     name: state.name || '',
                     phone: state.phone || '',
                     email: state.email || '',
-                    challengeStarted: state.challengeStarted || false,
+                    challengeStarted: true,
                     showCandidatePage: state.showCandidatePage || false
                 }));
             } else {
@@ -107,6 +123,10 @@
 
         clearInterval(timer!);
         previousCountdown = countdown;
+        candidateStore.update((state) => ({
+            ...state,
+            previousCountdown
+        }));
         endChallenge(countdown > 0);
     }
 
@@ -121,6 +141,7 @@
                 phone: candidatePhone,
                 email: candidateEmail,
                 countdown,
+                previousCountdown,
                 challengeStarted: false,
                 showCandidatePage: true
             });
@@ -200,11 +221,10 @@
         <Timer {countdown} />
     {/if}
 
-    {#if isCandidatePageVisible && !isChallengeStarted && buttonText === "Reiniciar Desafio"}
-    <p class="challenge__timer-label">⏱️ Desafio concluido em :</p>
-    <p>{formatTime(previousCountdown).minutes}:{formatTime(previousCountdown).seconds}</p>
-{/if}
-
+    {#if !isChallengeStarted && buttonText === "Reiniciar Desafio"}
+        <p class="challenge__timer-label">⏱️ Desafio concluído em:</p>
+        <p>{formatTime(previousCountdown).minutes}:{formatTime(previousCountdown).seconds}</p>
+    {/if}
 
     <div class="challenge__indicator">
         {#if isCandidatePageVisible}
@@ -217,7 +237,7 @@
     {#if !isChallengeStarted && buttonText === "Iniciar Desafio"}
         <div class="mx-auto max-w-7xl mb-4">
             <p>
-                Bem-vindo, convidado(cadete)! Você foi selecionado para integrar a próxima expedição intergaláctica. No
+                Bem-vindo, candidato(cadete)! Você foi selecionado para integrar a próxima expedição intergaláctica. No
                 entanto, antes de embarcar, sua identidade precisa ser registrada no sistema de bordo da nave
                 estelar <strong> Lesser-X </strong>.
             </p>
@@ -297,7 +317,7 @@
             </div>
         {/if}
         <div class="challenge__form-actions">
-            <button class="challenge__form-button--restart {buttonText === 'Iniciar Desafio' || buttonText === 'Reiniciar Desafio' && isCandidatePageVisible ? 'w-full' : 'w-1/2'}" on:click={startChallenge}>
+            <button class="challenge__form-button--restart" on:click={startChallenge}>
                 {buttonText}
             </button>
             {#if isChallengeStarted}

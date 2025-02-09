@@ -54,9 +54,9 @@
 }
 
 .challenge__form-button--restart {
-    @apply  btn text-center text-white bg-custom-blue border border-custom-blue rounded-lg transition-colors hover:bg-transparent hover:text-blue-500;
+    @apply flex-grow btn text-center text-white bg-custom-blue border border-custom-blue rounded-lg transition-colors hover:bg-transparent hover:text-blue-500;
 }
 
 .challenge__form-button--submit {
-    @apply w-1/2 btn bg-transparent text-custom-blue border-custom-blue hover:bg-custom-blue hover:text-white;
+    @apply flex-grow btn bg-transparent text-custom-blue border-custom-blue hover:bg-custom-blue hover:text-white;
 }

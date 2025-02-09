@@ -16,7 +16,7 @@
     {#if $candidateStore.showCandidatePage}
         <h1 class="candidate__title">Informações do Candidato</h1>
         <div class="candidate__card">
-            <div class="candidate__avatar">
+            <div>
                 <div class="candidate__avatar-icon">
                     <p class="candidate__avatar-text">{capitalizeFirstLetter($candidateStore.name?.charAt(0)) || '?'}</p>
                 </div>
