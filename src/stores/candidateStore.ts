@@ -8,6 +8,7 @@ export interface Candidate {
     challengeStarted: boolean;
     showCandidatePage: boolean;
     previousCountdown: number;
+    showPreviousCountdown: boolean;
 }
 
 export const candidateStore = writable<Candidate>({
@@ -17,5 +18,6 @@ export const candidateStore = writable<Candidate>({
     countdown: 15,
     challengeStarted: false,
     showCandidatePage: false,
-    previousCountdown: 15
+    previousCountdown: 15,
+    showPreviousCountdown: false
 });
