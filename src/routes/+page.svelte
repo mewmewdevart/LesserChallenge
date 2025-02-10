@@ -2,8 +2,10 @@
     import { goto } from '$app/navigation';
     import { onMount, onDestroy } from 'svelte';
     import { browser } from '$app/environment';
-    
+
+    import { showSpaceship } from '$stores/spaceshipStore';
     import { candidateStore } from '$stores/candidateStore';
+
     import Timer from '$components/Timer/Timer.svelte';
     import Modal from '$components/Modal/Modal.svelte';
 
@@ -78,6 +80,7 @@
         previousCountdown = 0;
         isChallengeStarted = false;
         isModalVisible = false;
+        showSpaceship.set(false);
         candidateName = '';
         candidatePhone = '';
         candidateEmail = '';
@@ -99,6 +102,7 @@
         isChallengeStarted = true;
         buttonText = 'Reiniciar Desafio';
         isModalVisible = false;
+        showSpaceship.set(false);
 
         timer = setInterval(() => {
             if (countdown > 0) {
@@ -154,12 +158,14 @@
             showPreviousCountdown = true;
         }
         isModalVisible = true;
+        showSpaceship.set(true);
         isChallengeStarted = false;
     }
 
     function closeModal() {
         isModalVisible = false;
         isSuccessModal = false;
+        showSpaceship.set(false);
         if (!isChallengeStarted) {
             countdown = INITIAL_COUNTDOWN;
             candidateStore.update((state) => ({
