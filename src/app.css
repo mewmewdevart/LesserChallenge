@@ -21,8 +21,9 @@
 
 
 .challenge__indicator-button {
-    @apply btn  text-center rounded-lg bg-white text-custom-blue border-custom-blue transition-colors hover:bg-custom-blue hover:text-white;
+    @apply btn  text-center rounded-lg bg-white text-custom-blue border-custom-blue transition-colors hover:bg-custom-blue hover:text-white disabled:opacity-95 disabled:cursor-none;
 }
+
 
 .challenge__title {
     @apply text-2xl font-bold my-2;
