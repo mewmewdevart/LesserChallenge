@@ -49,7 +49,6 @@ test.describe('Challenge Page', () => {
     });
 
     test('Should redirect to candidate page and show a warning message if challenge is not completed', async ({ page }) => {
-        await page.click('button:has-text("Iniciar Desafio")');
         await page.click('button:has-text("Ver Candidato")');
         await expect(page).toHaveURL('/candidate');
         await expect(page.locator('text=Por favor, finalize o desafio com sucesso para visualizar esta página.')).toBeVisible();
@@ -93,4 +92,12 @@ test.describe('Challenge Page', () => {
         await page.click('button[aria-label="Fechar modal"]');
         await expect(page.locator('.modal-box')).not.toBeVisible();
     });
+});
+
+test('homepage has title and links to intro page', async ({ page }) => {
+    // ...existing code...
+});
+
+test('should display the correct title', async ({ page }) => {
+    // ...existing code...
 });

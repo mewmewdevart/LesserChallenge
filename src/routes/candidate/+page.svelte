@@ -12,28 +12,30 @@
     }
 </script>
 
-<div class="candidate">
-    {#if $candidateStore.showCandidatePage}
-        <h1 class="candidate__title">Informações do Candidato</h1>
-        <div class="candidate__card">
-            <div>
-                <div class="candidate__avatar-icon">
-                    <p class="candidate__avatar-text">{capitalizeFirstLetter($candidateStore.name?.charAt(0)) || '?'}</p>
+<main>
+    <div class="candidate">
+        {#if $candidateStore.showCandidatePage}
+            <h1 class="candidate__title">Informações do Candidato(Cadete)</h1>
+            <div class="candidate__card">
+                <div>
+                    <div class="candidate__avatar-icon">
+                        <p class="candidate__avatar-text">{capitalizeFirstLetter($candidateStore.name?.charAt(0)) || '?'}</p>
+                    </div>
+                </div>
+                <div class="candidate__info">
+                    <h2 class="candidate__name">{capitalizeFirstLetter($candidateStore.name) || 'Usuário'}</h2>
+                    <p class="candidate__phone">{$candidateStore.phone || 'Telefone desconhecido'}</p>
+                    <p class="candidate__email">{$candidateStore.email || 'Email desconhecido'}</p>
+                    <div class="candidate__actions">
+                        <button class="candidate__button" on:click={goBack}>Voltar para o Desafio</button>
+                    </div>
                 </div>
             </div>
-            <div class="candidate__info">
-                <h2 class="candidate__name">{capitalizeFirstLetter($candidateStore.name) || 'Usuário'}</h2>
-                <p class="candidate__phone">{$candidateStore.phone || 'Telefone desconhecido'}</p>
-                <p class="candidate__email">{$candidateStore.email || 'Email desconhecido'}</p>
-                <div class="candidate__actions">
-                    <button class="candidate__button" on:click={goBack}>Voltar para o Desafio</button>
-                </div>
+        {:else}
+            <div class="candidate__message-container">
+                <p class="candidate__message">Por favor, finalize o desafio com sucesso para visualizar esta página.</p>
+                <button class="candidate__button" on:click={goBack}>Voltar para o Desafio</button>
             </div>
-        </div>
-    {:else}
-        <div class="candidate__message-container">
-            <p class="candidate__message">Por favor, finalize o desafio com sucesso para visualizar esta página.</p>
-            <button class="candidate__button" on:click={goBack}>Voltar para o Desafio</button>
-        </div>
-    {/if}
-</div>
+        {/if}
+    </div>
+</main>

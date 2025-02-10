@@ -139,28 +139,28 @@
     }
 
     function endChallenge(success: boolean) {
-        clearInterval(timer!);
-        modalMessage = success ? 'Desafio finalizado com sucesso!' : 'Desafio finalizado com falha!';
-        isSuccessModal = success;
+    clearInterval(timer!);
+    modalMessage = success ? 'Desafio finalizado com sucesso!' : 'Desafio finalizado com falha!';
+    isSuccessModal = success;
 
-        if (success) {
-            candidateStore.set({
-                name: candidateName,
-                phone: candidatePhone,
-                email: candidateEmail,
-                countdown,
-                previousCountdown,
-                challengeStarted: false,
-                showPreviousCountdown: true,
-                showCandidatePage: true
-            });
-            isCandidatePageVisible = true;
-            showPreviousCountdown = true;
-        }
-        isModalVisible = true;
-        showSpaceship.set(true);
-        isChallengeStarted = false;
+    if (success) {
+        candidateStore.set({
+            name: candidateName,
+            phone: candidatePhone,
+            email: candidateEmail,
+            countdown,
+            previousCountdown,
+            challengeStarted: false,
+            showPreviousCountdown: true,
+            showCandidatePage: true
+        });
+        isCandidatePageVisible = true;
+        showPreviousCountdown = true;
     }
+    isModalVisible = true;
+    showSpaceship.set(true);
+    isChallengeStarted = false;
+}
 
     function closeModal() {
         isModalVisible = false;
@@ -225,114 +225,124 @@
         const re = /^\(\d{2}\) \d{4,5}-\d{4}$/;
         return re.test(phone);
     }
+
+    $: buttonText = isChallengeStarted || $candidateStore?.name || $candidateStore?.phone || $candidateStore?.email ? 'Reiniciar Desafio' : 'Iniciar Desafio';
 </script>
 
-<div class="challenge">
-    {#if isChallengeStarted || showPreviousCountdown}
-        <Timer {countdown} {previousCountdown} {showPreviousCountdown}/>
-    {/if}
-
-    <div class="challenge__indicator">
-        {#if isCandidatePageVisible}
-            <span class="challenge__indicator-badge">Novo</span>
+<main>
+    <div class="challenge">
+        {#if isChallengeStarted || showPreviousCountdown}
+            <Timer {countdown} {previousCountdown} {showPreviousCountdown}/>
         {/if}
-        <button class="challenge__indicator-button" on:click={navigateToCandidatePage}>Ver Candidato</button>
+
+        <div class="challenge__indicator">
+            {#if isCandidatePageVisible}
+                <span class="challenge__indicator-badge">Novo</span>
+            {/if}
+            <button 
+            class="challenge__indicator-button" 
+            on:click={navigateToCandidatePage} 
+            disabled={isChallengeStarted && !isCandidatePageVisible}
+        >
+            Ver Candidato
+        </button>
+        </div>
+
+        <h1 class="challenge__title">🚀 Registro de Tripulação Espacial</h1>
+        {#if !isChallengeStarted && buttonText === "Iniciar Desafio"}
+            <div class="mx-auto max-w-7xl mb-4">
+                <p>
+                    Bem-vindo, candidato(cadete)! Você foi selecionado para integrar a próxima expedição intergaláctica. No
+                    entanto, antes de embarcar, sua identidade precisa ser registrada no sistema de bordo da nave
+                    estelar <strong> Lesser-X </strong>.
+                </p>
+                <div class="rounded-lg bg-yellow-50 p-4 text-sm text-yellow-800 dark:bg-gray-800 dark:text-yellow-300">
+                    <p>
+                        ⏳ <strong>Atenção!</strong> Você tem 15 segundos para preencher todos os campos corretamente
+                        do formulário e tem apenas uma chance para cada lançamento.
+                    </p>
+                </div>
+                <div class="instructions">
+                    <p>
+                        Para garantir sua vaga na tripulação, complete o formulário com seus dados antes que a
+                        contagem regressiva chegue a zero. Caso contrário, sua decolagem será abortada e você
+                        perderá essa oportunidade única de viajar pelo espaço!
+                    </p>
+                    <ul class="ml-4">
+                        <li>
+                            Ao clicar em "Iniciar Desafio", a sequência de lançamento será ativada e o tempo começará
+                            a contar.
+                        </li>
+                        <li>
+                            Se enviar os dados a tempo, sua identidade será confirmada e sua missão será um sucesso.
+                        </li>
+                        <li>
+                            Caso contrário, a nave partirá sem você, e você precisará aguardar a próxima oportunidade
+                            para ingressar na frota estelar.
+                        </li>
+                    </ul>
+                </div>
+                <p class="good-luck">Boa sorte, cadete! 🌌🚀</p>
+            </div>
+        {/if}
+
+        <form on:submit|preventDefault={submitChallenge} class="challenge__form">
+            {#if isChallengeStarted}
+                <div class="challenge__form-group">
+                    <div class="challenge__form-icon">
+                        <img src="/icon-user.svg" alt="Ícone de nome" />
+                    </div>
+                    <input
+                        type="text"
+                        bind:value={candidateName}
+                        class="challenge__form-input"
+                        placeholder="Digite seu nome"
+                        required
+                        disabled={isCandidatePageVisible}
+                    />
+                </div>
+                <div class="challenge__form-group">
+                    <div class="challenge__form-icon">
+                        <img src="/icon-phone.svg" alt="Ícone de telefone" />
+                    </div>
+                    <input
+                        type="tel"
+                        bind:value={candidatePhone}
+                        on:input={(e) => {
+                            if (e.target) candidatePhone = formatPhoneNumber((e.target as HTMLInputElement).value);
+                        }}
+                        class="challenge__form-input"
+                        placeholder="Digite o seu telefone"
+                        required
+                        disabled={isCandidatePageVisible}
+                    />
+                </div>
+                <div class="challenge__form-group">
+                    <div class="challenge__form-icon">
+                        <img src="/icon-email.svg" alt="Ícone de email" />
+                    </div>
+                    <input
+                        type="email"
+                        bind:value={candidateEmail}
+                        class="challenge__form-input"
+                        placeholder="Digite o seu email"
+                        required
+                        disabled={isCandidatePageVisible}
+                    />
+                </div>
+            {/if}
+            <div class="challenge__form-actions">
+                <button class="challenge__form-button--restart" on:click={startChallenge}>
+                    {buttonText}
+                </button>
+                {#if isChallengeStarted}
+                    <button type="submit" class="challenge__form-button--submit">
+                        Enviar
+                    </button>
+                {/if}
+            </div>
+        </form>
     </div>
 
-    <h1 class="challenge__title">🚀 Registro de Tripulação Espacial</h1>
-    {#if !isChallengeStarted && buttonText === "Iniciar Desafio"}
-        <div class="mx-auto max-w-7xl mb-4">
-            <p>
-                Bem-vindo, candidato(cadete)! Você foi selecionado para integrar a próxima expedição intergaláctica. No
-                entanto, antes de embarcar, sua identidade precisa ser registrada no sistema de bordo da nave
-                estelar <strong> Lesser-X </strong>.
-            </p>
-            <div class="rounded-lg bg-yellow-50 p-4 text-sm text-yellow-800 dark:bg-gray-800 dark:text-yellow-300">
-                <p>
-                    ⏳ <strong>Atenção!</strong> Você tem 15 segundos para preencher todos os campos corretamente
-                    do formulário e tem apenas uma chance para cada lançamento.
-                </p>
-            </div>
-            <div class="instructions">
-                <p>
-                    Para garantir sua vaga na tripulação, complete o formulário com seus dados antes que a
-                    contagem regressiva chegue a zero. Caso contrário, sua decolagem será abortada e você
-                    perderá essa oportunidade única de viajar pelo espaço!
-                </p>
-                <ul class="ml-4">
-                    <li>
-                        Ao clicar em "Iniciar Desafio", a sequência de lançamento será ativada e o tempo começará
-                        a contar.
-                    </li>
-                    <li>
-                        Se enviar os dados a tempo, sua identidade será confirmada e sua missão será um sucesso.
-                    </li>
-                    <li>
-                        Caso contrário, a nave partirá sem você, e você precisará aguardar a próxima oportunidade
-                        para ingressar na frota estelar.
-                    </li>
-                </ul>
-            </div>
-            <p class="good-luck">Boa sorte, cadete! 🌌🚀</p>
-        </div>
-    {/if}
-
-    <form on:submit|preventDefault={submitChallenge} class="challenge__form">
-        {#if isChallengeStarted}
-            <div class="challenge__form-group">
-                <div class="challenge__form-icon">
-                    <img src="/icon-user.svg" alt="Ícone de nome" />
-                </div>
-                <input
-                    type="text"
-                    bind:value={candidateName}
-                    class="challenge__form-input"
-                    placeholder="Digite seu nome"
-                    required
-                    disabled={isCandidatePageVisible}
-                />
-            </div>
-            <div class="challenge__form-group">
-                <div class="challenge__form-icon">
-                    <img src="/icon-phone.svg" alt="Ícone de telefone" />
-                </div>
-                <input
-                    type="tel"
-                    bind:value={candidatePhone}
-                    on:input={(e) => {
-                        if (e.target) candidatePhone = formatPhoneNumber((e.target as HTMLInputElement).value);
-                    }}
-                    class="challenge__form-input"
-                    placeholder="Digite o seu telefone"
-                    required
-                    disabled={isCandidatePageVisible}
-                />
-            </div>
-            <div class="challenge__form-group">
-                <div class="challenge__form-icon">
-                    <img src="/icon-email.svg" alt="Ícone de email" />
-                </div>
-                <input
-                    type="email"
-                    bind:value={candidateEmail}
-                    class="challenge__form-input"
-                    placeholder="Digite o seu email"
-                    required
-                    disabled={isCandidatePageVisible}
-                />
-            </div>
-        {/if}
-        <div class="challenge__form-actions">
-            <button class="challenge__form-button--restart" on:click={startChallenge}>
-                {buttonText}
-            </button>
-            {#if isChallengeStarted}
-                <button type="submit" class="challenge__form-button--submit">
-                    Enviar
-                </button>
-            {/if}
-        </div>
-    </form>
-</div>
-
-<Modal {isModalVisible} {isSuccessModal} {modalMessage} onClose={closeModal} />
+    <Modal {isModalVisible} {isSuccessModal} {modalMessage} onClose={closeModal} />
+</main>

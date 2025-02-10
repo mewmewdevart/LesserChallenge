@@ -11,42 +11,54 @@
             seconds: String(remainingSeconds).padStart(2, '0'),
         };
     }
+
+    let timeLeft = 60;
+
+    const startTimer = () => {
+        // ...existing code...
+    };
 </script>
 
-<div class="flex gap-4 flex-col">
-    {#if countdown !== undefined && !showPreviousCountdown}
-        <p class="challenge__timer-label">Tempo restante:</p>
-        <div class="flex gap-4">
-            <div>
-                <span class="font-mono text-6xl">
-                    <span class="timer-minutes">{formatTime(countdown).minutes}</span>
-                </span>
-                min
-            </div>
-            <div>
-                <span class="font-mono text-6xl">
-                    <span class="timer-seconds">{formatTime(countdown).seconds}</span>
-                </span>
-                sec
-            </div>
-        </div>
-    {/if}
+<style>
+    /* Add your styles here */
+</style>
 
-    {#if previousCountdown !== undefined && showPreviousCountdown}
-        <p class="challenge__timer-label">⏱️ Desafio concluído em:</p>
-        <div class="flex gap-4">
-            <div>
-                <span class="font-mono text-6xl">
-                    <span class="timer-minutes">{formatTime(previousCountdown).minutes}</span>
-                </span>
-                min
+<main>
+    <div class="flex gap-4 flex-col text-center">
+        {#if countdown !== undefined && !showPreviousCountdown}
+            <p class="challenge__timer-label">Tempo restante:</p>
+            <div class="flex gap-4">
+                <div>
+                    <span class="font-mono text-6xl">
+                        <span class="timer-minutes">{formatTime(countdown).minutes}</span>
+                    </span>
+                    min
+                </div>
+                <div>
+                    <span class="font-mono text-6xl">
+                        <span class="timer-seconds">{formatTime(countdown).seconds}</span>
+                    </span>
+                    sec
+                </div>
             </div>
-            <div>
-                <span class="font-mono text-6xl">
-                    <span class="timer-seconds">{formatTime(previousCountdown).seconds}</span>
-                </span>
-                sec
+        {/if}
+
+        {#if previousCountdown !== undefined && showPreviousCountdown}
+            <p class="challenge__timer-label">⏱️ Desafio concluído em:</p>
+            <div class="flex gap-4">
+                <div>
+                    <span class="font-mono text-6xl">
+                        <span class="timer-minutes">{formatTime(previousCountdown).minutes}</span>
+                    </span>
+                    min
+                </div>
+                <div>
+                    <span class="font-mono text-6xl">
+                        <span class="timer-seconds">{formatTime(previousCountdown).seconds}</span>
+                    </span>
+                    sec
+                </div>
             </div>
-        </div>
-    {/if}
-</div>
+        {/if}
+    </div>
+</main>
