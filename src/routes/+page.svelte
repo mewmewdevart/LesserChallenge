@@ -67,6 +67,7 @@
     }
 
     function startChallenge() {
+        resetFormFields();
         if (isChallengeStarted || $candidateStore?.name || $candidateStore?.phone || $candidateStore?.email) {
             resetChallenge();
         } else {
@@ -81,10 +82,9 @@
         isChallengeStarted = false;
         isModalVisible = false;
         showSpaceship.set(false);
-        candidateName = '';
-        candidatePhone = '';
-        candidateEmail = '';
+        resetFormFields();
         showPreviousCountdown = false;
+        isCandidatePageVisible = false;
         candidateStore.set({
             name: '',
             phone: '',
@@ -139,33 +139,32 @@
     }
 
     function endChallenge(success: boolean) {
-    clearInterval(timer!);
-    modalMessage = success ? 'Desafio finalizado com sucesso!' : 'Desafio finalizado com falha!';
-    isSuccessModal = success;
+        clearInterval(timer!);
+        modalMessage = success ? 'Desafio finalizado com sucesso!' : 'Desafio finalizado com falha!';
+        isSuccessModal = success;
 
-    if (success) {
-        candidateStore.set({
-            name: candidateName,
-            phone: candidatePhone,
-            email: candidateEmail,
-            countdown,
-            previousCountdown,
-            challengeStarted: false,
-            showPreviousCountdown: true,
-            showCandidatePage: true
-        });
-        isCandidatePageVisible = true;
-        showPreviousCountdown = true;
+        if (success) {
+            candidateStore.set({
+                name: candidateName,
+                phone: candidatePhone,
+                email: candidateEmail,
+                countdown,
+                previousCountdown,
+                challengeStarted: false,
+                showPreviousCountdown: true,
+                showCandidatePage: true
+            });
+            isCandidatePageVisible = true;
+            showPreviousCountdown = true;
+        }
+        isModalVisible = true;
+        showSpaceship.set(true);
+        isChallengeStarted = false;
     }
-    isModalVisible = true;
-    showSpaceship.set(true);
-    isChallengeStarted = false;
-}
 
     function closeModal() {
         isModalVisible = false;
         isSuccessModal = false;
-        showSpaceship.set(false);
         if (!isChallengeStarted) {
             countdown = INITIAL_COUNTDOWN;
             candidateStore.update((state) => ({
@@ -195,6 +194,12 @@
         if (modal && !modal.contains(event.target as Node)) {
             closeModal();
         }
+    }
+
+    function resetFormFields() {
+        candidateName = '';
+        candidatePhone = '';
+        candidateEmail = '';
     }
 
     $: if (browser && isModalVisible) {
@@ -298,7 +303,7 @@
                         class="challenge__form-input"
                         placeholder="Digite seu nome"
                         required
-                        disabled={isCandidatePageVisible}
+                        
                     />
                 </div>
                 <div class="challenge__form-group">
@@ -314,7 +319,7 @@
                         class="challenge__form-input"
                         placeholder="Digite o seu telefone"
                         required
-                        disabled={isCandidatePageVisible}
+                        
                     />
                 </div>
                 <div class="challenge__form-group">
@@ -327,7 +332,7 @@
                         class="challenge__form-input"
                         placeholder="Digite o seu email"
                         required
-                        disabled={isCandidatePageVisible}
+                        
                     />
                 </div>
             {/if}

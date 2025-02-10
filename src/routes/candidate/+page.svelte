@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="candidate__info">
-                    <h2 class="candidate__name">{capitalizeFirstLetter($candidateStore.name) || 'Usuário'}</h2>
+                    <h2 class="candidate__name" id="candidate-name">{capitalizeFirstLetter($candidateStore.name) || 'Usuário'}</h2>
                     <p class="candidate__phone">{$candidateStore.phone || 'Telefone desconhecido'}</p>
                     <p class="candidate__email">{$candidateStore.email || 'Email desconhecido'}</p>
                     <div class="candidate__actions">

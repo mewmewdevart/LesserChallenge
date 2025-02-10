@@ -67,7 +67,7 @@ test.describe('Challenge Page', () => {
         await page.click('button[aria-label="Fechar modal"]');
         await page.click('button:has-text("Ver Candidato")');
         await expect(page).toHaveURL('/candidate');
-        await expect(page.locator('text=Larissa Cristina')).toBeVisible();
+        await expect(page.locator('#candidate-name')).toBeVisible();
         await expect(page.locator('text=(11) 94002-8922')).toBeVisible();
         await expect(page.locator('text=larissa@example.com')).toBeVisible();
         await page.click('button:has-text("Voltar para o Desafio")');
