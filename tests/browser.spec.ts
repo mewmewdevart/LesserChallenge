@@ -92,12 +92,29 @@ test.describe('Challenge Page', () => {
         await page.click('button[aria-label="Fechar modal"]');
         await expect(page.locator('.modal-box')).not.toBeVisible();
     });
-});
 
-test('homepage has title and links to intro page', async ({ page }) => {
-    // ...existing code...
-});
+    test('Should restart the challenge correctly', async ({ page }) => {
+        await page.click('button:has-text("Iniciar Desafio")');
+        await expect(page.locator('.timer-minutes')).toHaveText('00');
+        await expect(page.locator('.timer-seconds')).toHaveText('15');
+        await page.click('button:has-text("Reiniciar Desafio")');
+        await page.click('button:has-text("Iniciar Desafio")');
+        await expect(page.locator('.timer-minutes')).toHaveText('00');
+        await expect(page.locator('.timer-seconds')).toHaveText('15');
+    });
 
-test('should display the correct title', async ({ page }) => {
-    // ...existing code...
+    test('Should show warning message when navigating to candidate page without starting the challenge', async ({ page }) => {
+        await page.click('button:has-text("Ver Candidato")');
+        await expect(page).toHaveURL('/candidate');
+        await expect(page.locator('text=Por favor, finalize o desafio com sucesso para visualizar esta página.')).toBeVisible();
+    });
+
+    test('Should show warning message when navigating to candidate page after failing the challenge', async ({ page }) => {
+        await page.click('button:has-text("Iniciar Desafio")');
+        await page.waitForTimeout(16000); // wait for 16 seconds to let the countdown end
+        await page.click('button[aria-label="Fechar modal"]');
+        await page.click('button:has-text("Ver Candidato")');
+        await expect(page).toHaveURL('/candidate');
+        await expect(page.locator('text=Por favor, finalize o desafio com sucesso para visualizar esta página.')).toBeVisible();
+    });
 });

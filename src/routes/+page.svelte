@@ -96,6 +96,7 @@
             showPreviousCountdown: false
         });
         buttonText = 'Iniciar Desafio';
+        showPreviousCountdown = false;
     }
 
     function initiateNewChallenge() {
