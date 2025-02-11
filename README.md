@@ -19,6 +19,7 @@
 </p>
 
 ## Sumário
+
 1. [Desafio](#desafio)
 2. [Sobre o Projeto](#sobre-o-projeto)
 3. [Funcionalidades](#funcionalidades)
@@ -31,17 +32,17 @@
 9. [Referências](#referências)
 10. [Licença](#licença)
 
----
 
 ## Desafio
-O desafio consiste em criar um site que exibe um formulário com campos para "Nome", "Telefone" e "Email". O usuário deve preencher o formulário e enviá-lo dentro de um limite de 15 segundos. O site deve exibir um contador regressivo e modais de sucesso ou falha, dependendo do tempo de envio. Além disso, o site deve incluir uma página de candidato que exibe os dados preenchidos, com navegação entre as páginas sem interromper a contagem do tempo.
 
----
+O Desafio Tecnico da Lesser consiste em criar um site que exibe um formulário com campos para "Nome", "Telefone" e "Email". O usuário deve preencher o formulário e enviá-lo dentro de um limite de 15 segundos. O site deve exibir um contador regressivo e modais de sucesso ou falha, dependendo do tempo de envio. Além disso, o site deve incluir uma página de candidato que exibe os dados preenchidos, com navegação entre as páginas sem interromper a contagem do tempo.
 
 ## Sobre o Projeto
-O **Lesser Form Countdown** é um projeto desenvolvido como parte de um desafio técnico para a vaga de Javascript Developer na Lesser. O objetivo é simular um cenário onde o usuário precisa completar um formulário rapidamente, testando habilidades como manipulação de tempo, gerenciamento de estado e interação com o usuário.
+O objetivo foi criar uma interface mais intuitiva e alinhada ao propósito da empresa de reconectar as pessoas com atividades que nutrem o espírito. Para isso, adaptei o desafio para um contexto imersivo: o usuário assume o papel de um cadete prestes a embarcar em uma expedição intergaláctica. Ele tem 15 segundos para registrar sua identidade no sistema da nave Lesser-X. Se preencher os dados corretamente a tempo, a nave decola com ele a bordo; caso contrário, a decolagem ocorre da mesma forma — mas sem o cadete. Foi necessário ajustar esse contexto ao enunciado do desafio sem desrespeitar as regras estabelecidas.
 
----
+Também tive a oportunidade de escrever testes E2E usando Playwright, o que foi um desafio tão difícil quanto divertido. A cada novo cenário testado, surgia a vontade de cobrir ainda mais possibilidades, e esse processo acabou revelando problemas no fluxo de interação do site que antes passavam despercebidos. Isso demandou mais tempo do que o esperado, mas aprimorou a resolução e a prevenção de problemas.
+
+Além disso, enfrentei desafios técnicos durante o desenvolvimento, como o próprio Svelte sinalizando erros ao não reconhecer o svelteHTML. Esse problema me levou a horas de debugging, pesquisa em reports de issues no GitHub do framework e diversos testes envolvendo instalação e remoção de pacotes no package.json. No entanto, apesar das dificuldades, foi uma experiência enriquecedora. Sem experiência prévia com Svelte, precisei aprender na prática, equilibrando a leitura da documentação com tentativa e erro — o que tornou o aprendizado ainda mais valioso.
 
 ## Funcionalidades
 - **Formulário Interativo**: Campos para "Nome", "Telefone" e "Email".
@@ -53,8 +54,6 @@ O **Lesser Form Countdown** é um projeto desenvolvido como parte de um desafio 
 - **Navegação**: Botões para alternar entre a página do formulário e a página do candidato sem interromper a contagem.
 - **Validação**: Desabilita o botão de envio se os campos não estiverem preenchidos corretamente.
 
----
-
 ## Tecnologias Utilizadas
 - **SvelteKit**: Framework para construção de aplicações web modernas.
 - **TailwindCSS**: Framework CSS utilitário para estilização rápida e responsiva.
@@ -62,14 +61,13 @@ O **Lesser Form Countdown** é um projeto desenvolvido como parte de um desafio 
 - **TypeScript**: Adiciona tipagem estática ao JavaScript para maior segurança e produtividade.
 - **Playwright**: Ferramenta de teste end-to-end para garantir a funcionalidade do projeto.
 
----
 
 ## Estrutura do Projeto
 ```
 my-app/
 ├── src/
-│   ├── lib/
-│   │   └── stores.ts          # Gerenciamento de estado (tempo e dados do candidato)
+│   ├── components/		# Componentes usados durante o desenvolvimento (timer, modal, header etc)
+│   ├── stores/			# Gerenciamento de estado (tempo e dados do candidato)
 │   ├── routes/
 │   │   ├── +page.svelte       # Página principal com o formulário
 │   │   ├── candidate/
@@ -80,16 +78,16 @@ my-app/
 │   └── browser.spec.ts        # Testes end-to-end com Playwright
 ├── playwright.config.ts       # Configuração do Playwright
 ├── tailwind.config.cjs        # Configuração do TailwindCSS
-├── svelte.config.js           # Configuração do SvelteKit
-├── package.json               # Dependências e scripts do projeto
-└── README.md                  # Documentação do projeto
 ```
 
----
+
 
 ## Instruções de Uso
 
 ### Pré-requisitos
+
+❗️ | Certifique-se de ter as seguintes ferramentas instaladas em sua máquina antes de prosseguir:
+
 - Node.js (v18 ou superior)
 - PNPM (gerenciador de pacotes)
 
@@ -109,7 +107,11 @@ my-app/
    ```
 4. Acesse o site em: `http://localhost:5173`.
 
----
+![Captura de tela de 2025-02-10 23-19-55](https://github.com/user-attachments/assets/6a78d34f-c1f1-4ab5-bdf9-426aae8d1464)
+
+
+https://github.com/user-attachments/assets/9e7b9eaf-42ed-4c67-a8db-c4dcb736bd8b
+
 
 ## Testes
 Para garantir que todas as funcionalidades estão funcionando corretamente, execute os testes com Playwright:
@@ -117,7 +119,6 @@ Para garantir que todas as funcionalidades estão funcionando corretamente, exec
 npx playwright test browser.spec.ts
 ```
 
-## Testes
 Os testes cobrem todos os cenários críticos do projeto, garantindo que a aplicação funcione conforme o esperado. Abaixo estão os principais cenários testados:
 1. **Início do Desafio e Contador Regressivo**:
    - Verifica se o contador regressivo é exibido corretamente após o início do desafio.
@@ -139,7 +140,7 @@ Os testes cobrem todos os cenários críticos do projeto, garantindo que a aplic
    - Verifica se a página do candidato exibe uma mensagem de aviso caso o desafio não tenha sido concluído com sucesso.
    - Confirma que os detalhes do candidato são exibidos corretamente após o envio bem-sucedido.
 
----
+
 
 ## Referências
 - [SvelteKit Documentation](https://kit.svelte.dev/)
@@ -147,12 +148,12 @@ Os testes cobrem todos os cenários críticos do projeto, garantindo que a aplic
 - [DaisyUI Documentation](https://daisyui.com/)
 - [Playwright Documentation](https://playwright.dev/)
 
----
+
 
 ## Licença
 Este projeto está licenciado sob a [MIT License](LICENSE).
 
----
+
 
 <p align="center">
   Desenvolvido com muito ☕ por
