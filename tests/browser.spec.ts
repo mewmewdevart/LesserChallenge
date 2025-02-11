@@ -109,12 +109,30 @@ test.describe('Challenge Page', () => {
         await expect(page.locator('text=Por favor, finalize o desafio com sucesso para visualizar esta página.')).toBeVisible();
     });
 
-    test('Should show warning message when navigating to candidate page after failing the challenge', async ({ page }) => {
+    test('Should show failure modal on candidate page and redirect to initial page without showing form or another modal', async ({ page }) => {
         await page.click('button:has-text("Iniciar Desafio")');
-        await page.waitForTimeout(16000); // wait for 16 seconds to let the countdown end
-        await page.click('button[aria-label="Fechar modal"]');
         await page.click('button:has-text("Ver Candidato")');
-        await expect(page).toHaveURL('/candidate');
-        await expect(page.locator('text=Por favor, finalize o desafio com sucesso para visualizar esta página.')).toBeVisible();
+        await page.waitForTimeout(16000); // wait for 16 seconds to let the countdown end
+        await expect(page.locator('#modalBox')).toBeVisible();
+        await expect(page.locator('#modalBox')).toContainText('Desafio finalizado com falha!');
+        await page.click('button[aria-label="Fechar modal"]');
+        await expect(page).toHaveURL('/');
+        await expect(page.locator('.challenge__form')).not.toBeVisible();
+        await expect(page.locator('#modalBox')).not.toBeVisible();
+    });
+
+    test('Should show success modal on candidate page and redirect to initial page with everything reset', async ({ page }) => {
+        await page.click('button:has-text("Iniciar Desafio")');
+        await page.fill('input[placeholder="Digite seu nome"]', 'Larissa Cristina');
+        await page.fill('input[placeholder="Digite o seu telefone"]', '(11) 94002-8922');
+        await page.fill('input[placeholder="Digite o seu email"]', 'larissa@lesser.com');
+        await page.click('button:has-text("Ver Candidato")');
+        await page.waitForTimeout(16000); // wait for 16 seconds to let the countdown end
+        await expect(page.locator('#modalBox')).toBeVisible();
+        await expect(page.locator('#modalBox')).toContainText('Desafio finalizado com sucesso!');
+        await page.click('button[aria-label="Fechar modal"]');
+        await expect(page).toHaveURL('/');
+        await expect(page.locator('.challenge__form')).not.toBeVisible();
+        await expect(page.locator('#modalBox')).not.toBeVisible();
     });
 });
