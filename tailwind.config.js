@@ -1,10 +1,6 @@
-import forms from '@tailwindcss/forms';
-import typography from '@tailwindcss/typography';
-import daisyui from 'daisyui';
-import type { Config } from 'tailwindcss';
-
-export default {
-  content: ['./src/**/*.{html,js,ts,jsx,tsx,svelte}'], // Garante que o Tailwind escaneie esses arquivos
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./src/**/*.{html,js,ts,jsx,tsx,svelte}'],
   theme: {
     extend: {
       colors: {
@@ -23,5 +19,9 @@ export default {
       },
     },
   },
-  plugins: [typography, forms, daisyui],
-} satisfies Config;
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+    require('daisyui'),
+  ],
+}
