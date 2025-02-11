@@ -5,11 +5,11 @@
 
     import { showSpaceship } from '$stores/spaceshipStore';
     import { candidateStore } from '$stores/candidateStore';
+    import { INITIAL_COUNTDOWN } from '$stores/candidateStore';
 
     import Timer from '$components/Timer/Timer.svelte';
     import Modal from '$components/Modal/Modal.svelte';
 
-    const INITIAL_COUNTDOWN = 15;
 
     let candidateName: string = '';
     let candidatePhone: string = '';
@@ -45,6 +45,10 @@
         if ($candidateStore.name || $candidateStore.phone || $candidateStore.email) {
             buttonText = 'Reiniciar Desafio';
         }
+
+        if (isChallengeStarted) {
+            startTimer();
+        }
     });
 
     function formatPhoneNumber(value: string): string {
@@ -68,6 +72,7 @@
 
     function startChallenge() {
         resetFormFields();
+        showSpaceship.set(false);
         if (isChallengeStarted || $candidateStore?.name || $candidateStore?.phone || $candidateStore?.email) {
             resetChallenge();
         } else {
@@ -104,7 +109,10 @@
         buttonText = 'Reiniciar Desafio';
         isModalVisible = false;
         showSpaceship.set(false);
+        startTimer();
+    }
 
+    function startTimer() {
         timer = setInterval(() => {
             if (countdown > 0) {
                 countdown--;
@@ -246,12 +254,11 @@
                 <span class="challenge__indicator-badge">Novo</span>
             {/if}
             <button 
-            class="challenge__indicator-button" 
-            on:click={navigateToCandidatePage} 
-            disabled={isChallengeStarted && !isCandidatePageVisible}
-        >
-            Ver Candidato
-        </button>
+                class="challenge__indicator-button" 
+                on:click={navigateToCandidatePage}
+            >
+                Ver Candidato
+            </button>
         </div>
 
         <h1 class="challenge__title">🚀 Registro de Tripulação Espacial</h1>
