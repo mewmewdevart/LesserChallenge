@@ -11,17 +11,7 @@
             seconds: String(remainingSeconds).padStart(2, '0'),
         };
     }
-
-    let timeLeft = 60;
-
-    const startTimer = () => {
-        // ...existing code...
-    };
 </script>
-
-<style>
-    /* Add your styles here */
-</style>
 
 <main>
     <div class="flex gap-4 flex-col text-center">
@@ -30,13 +20,13 @@
             <div class="flex gap-4">
                 <div>
                     <span class="font-mono text-6xl">
-                        <span class="timer-minutes">{formatTime(countdown).minutes}</span>
+                        <span id="timerMinutes" class="timer-minutes">{formatTime(countdown).minutes}</span>
                     </span>
                     min
                 </div>
                 <div>
                     <span class="font-mono text-6xl">
-                        <span class="timer-seconds">{formatTime(countdown).seconds}</span>
+                        <span id="timerSeconds" class="timer-seconds">{formatTime(countdown).seconds}</span>
                     </span>
                     sec
                 </div>
@@ -48,13 +38,13 @@
             <div class="flex gap-4">
                 <div>
                     <span class="font-mono text-6xl">
-                        <span class="timer-minutes">{formatTime(previousCountdown).minutes}</span>
+                        <span id="timerMinutes" class="timer-minutes">{formatTime(previousCountdown).minutes}</span>
                     </span>
                     min
                 </div>
                 <div>
                     <span class="font-mono text-6xl">
-                        <span class="timer-seconds">{formatTime(previousCountdown).seconds}</span>
+                        <span id="timerSeconds" class="timer-seconds">{formatTime(previousCountdown).seconds}</span>
                     </span>
                     sec
                 </div>

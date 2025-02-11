@@ -14,10 +14,10 @@ test.describe('Challenge Page', () => {
         await page.click('button:has-text("Iniciar Desafio")');
         await page.fill('input[placeholder="Digite seu nome"]', 'Larissa Cristina');
         await page.fill('input[placeholder="Digite o seu telefone"]', '(11) 94002-8922');
-        await page.fill('input[placeholder="Digite o seu email"]', 'larissa@example.com');
+        await page.fill('input[placeholder="Digite o seu email"]', 'larissa@lesser.com');
         await page.click('button:has-text("Enviar")');
-        await expect(page.locator('.modal-box')).toBeVisible();
-        await expect(page.locator('.modal-box')).toContainText('Desafio finalizado com sucesso!');
+        await expect(page.locator('#modalBox')).toBeVisible();
+        await expect(page.locator('#modalBox')).toContainText('Desafio finalizado com sucesso!');
     });
 
     test('Should show error messages and disable submit button for invalid form field', async ({ page }) => {
@@ -32,20 +32,20 @@ test.describe('Challenge Page', () => {
 
     test('Should correctly decrement the countdown timer every second', async ({ page }) => {
         await page.click('button:has-text("Iniciar Desafio")');
-        await expect(page.locator('.timer-minutes')).toHaveText('00');
-        await expect(page.locator('.timer-seconds')).toHaveText('15');
+        await expect(page.locator('#timerMinutes')).toHaveText('00');
+        await expect(page.locator('#timerSeconds')).toHaveText('15');
         await page.waitForTimeout(5000);
-        await expect(page.locator('.timer-seconds')).toHaveText('10');
+        await expect(page.locator('#timerSeconds')).toHaveText('10');
     });
 
     test('Should show failure modal when the countdown reaches zero before form submission', async ({ page }) => {
         await page.click('button:has-text("Iniciar Desafio")');
         await page.fill('input[placeholder="Digite seu nome"]', 'Larissa Cristina');
         await page.fill('input[placeholder="Digite o seu telefone"]', '(11) 94002-8922');
-        await page.fill('input[placeholder="Digite o seu email"]', 'larissa@example.com');
+        await page.fill('input[placeholder="Digite o seu email"]', 'larissa@lesser.com');
         await page.waitForTimeout(16000); // wait for 16 seconds to let the countdown end
-        await expect(page.locator('.modal-box')).toBeVisible();
-        await expect(page.locator('.modal-box')).toContainText('Desafio finalizado com falha!');
+        await expect(page.locator('#modalBox')).toBeVisible();
+        await expect(page.locator('#modalBox')).toContainText('Desafio finalizado com falha!');
     });
 
     test('Should redirect to candidate page and show a warning message if challenge is not completed', async ({ page }) => {
@@ -60,16 +60,16 @@ test.describe('Challenge Page', () => {
         await page.click('button:has-text("Iniciar Desafio")');
         await page.fill('input[placeholder="Digite seu nome"]', 'Larissa Cristina');
         await page.fill('input[placeholder="Digite o seu telefone"]', '(11) 94002-8922');
-        await page.fill('input[placeholder="Digite o seu email"]', 'larissa@example.com');
+        await page.fill('input[placeholder="Digite o seu email"]', 'larissa@lesser.com');
         await page.click('button:has-text("Enviar")');
-        await expect(page.locator('.modal-box')).toBeVisible();
-        await expect(page.locator('.modal-box')).toContainText('Desafio finalizado com sucesso!');
+        await expect(page.locator('#modalBox')).toBeVisible();
+        await expect(page.locator('#modalBox')).toContainText('Desafio finalizado com sucesso!');
         await page.click('button[aria-label="Fechar modal"]');
         await page.click('button:has-text("Ver Candidato")');
         await expect(page).toHaveURL('/candidate');
         await expect(page.locator('#candidate-name')).toBeVisible();
         await expect(page.locator('text=(11) 94002-8922')).toBeVisible();
-        await expect(page.locator('text=larissa@example.com')).toBeVisible();
+        await expect(page.locator('text=larissa@lesser.com')).toBeVisible();
         await page.click('button:has-text("Voltar para o Desafio")');
         await expect(page).toHaveURL('/');
     });
@@ -78,29 +78,29 @@ test.describe('Challenge Page', () => {
         await page.click('button:has-text("Iniciar Desafio")');
         await page.fill('input[placeholder="Digite seu nome"]', 'Larissa Cristina');
         await page.fill('input[placeholder="Digite o seu telefone"]', '(11) 94002-8922');
-        await page.fill('input[placeholder="Digite o seu email"]', 'larissa@example.com');
+        await page.fill('input[placeholder="Digite o seu email"]', 'larissa@lesser.com');
         await page.click('button:has-text("Enviar")');
-        await expect(page.locator('.modal-box')).toBeVisible();
+        await expect(page.locator('#modalBox')).toBeVisible();
         await page.click('button[aria-label="Fechar modal"]');
-        await expect(page.locator('.modal-box')).not.toBeVisible();
+        await expect(page.locator('#modalBox')).not.toBeVisible();
     });
 
     test('Should close the failure modal when the close button is clicked', async ({ page }) => {
         await page.click('button:has-text("Iniciar Desafio")');
         await page.waitForTimeout(16000); 
-        await expect(page.locator('.modal-box')).toBeVisible();
+        await expect(page.locator('#modalBox')).toBeVisible();
         await page.click('button[aria-label="Fechar modal"]');
-        await expect(page.locator('.modal-box')).not.toBeVisible();
+        await expect(page.locator('#modalBox')).not.toBeVisible();
     });
 
     test('Should restart the challenge correctly', async ({ page }) => {
         await page.click('button:has-text("Iniciar Desafio")');
-        await expect(page.locator('.timer-minutes')).toHaveText('00');
-        await expect(page.locator('.timer-seconds')).toHaveText('15');
+        await expect(page.locator('#timerMinutes')).toHaveText('00');
+        await expect(page.locator('#timerSeconds')).toHaveText('15');
         await page.click('button:has-text("Reiniciar Desafio")');
         await page.click('button:has-text("Iniciar Desafio")');
-        await expect(page.locator('.timer-minutes')).toHaveText('00');
-        await expect(page.locator('.timer-seconds')).toHaveText('15');
+        await expect(page.locator('#timerMinutes')).toHaveText('00');
+        await expect(page.locator('#timerSeconds')).toHaveText('15');
     });
 
     test('Should show warning message when navigating to candidate page without starting the challenge', async ({ page }) => {

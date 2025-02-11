@@ -12,7 +12,7 @@
         aria-describedby="modal-description" 
         aria-live="polite"
     >
-        <div class="modal-box" role="dialog" aria-modal="true">
+        <div id="modalBox" class="modal-box" role="dialog" aria-modal="true">
             <button 
                 class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" 
                 on:click={onClose} 

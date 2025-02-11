@@ -1,6 +1,7 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
     import { candidateStore } from '$stores/candidateStore';
+    import Timer from '$components/Timer/Timer.svelte';
     import './candidate.css';
 
     function goBack() {
@@ -31,6 +32,9 @@
                     </div>
                 </div>
             </div>
+            {#if $candidateStore.challengeStarted}
+                <Timer countdown={$candidateStore.countdown} previousCountdown={$candidateStore.previousCountdown} showPreviousCountdown={false} />
+            {/if}
         {:else}
             <div class="candidate__message-container">
                 <p class="candidate__message">Por favor, finalize o desafio com sucesso para visualizar esta página.</p>
