@@ -309,12 +309,13 @@
                     <input
                         type="text"
                         bind:value={candidateName}
-                        class="challenge__form-input"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;"
                         placeholder="Digite seu nome"
                         required
                         
                     />
                 </div>
+
                 <div class="challenge__form-group">
                     <div class="challenge__form-icon">
                         <img src="/icon-phone.svg" alt="Ícone de telefone" />
@@ -325,7 +326,7 @@
                         on:input={(e) => {
                             if (e.target) candidatePhone = formatPhoneNumber((e.target as HTMLInputElement).value);
                         }}
-                        class="challenge__form-input"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;"
                         placeholder="Digite o seu telefone"
                         required
                         
@@ -338,7 +339,7 @@
                     <input
                         type="email"
                         bind:value={candidateEmail}
-                        class="challenge__form-input"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;"
                         placeholder="Digite o seu email"
                         required
                         

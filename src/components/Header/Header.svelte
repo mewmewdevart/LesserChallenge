@@ -1,7 +1,8 @@
 <script lang="ts">
     import CloudBackground from '$components/CloudBackground/CloudBackground.svelte';
-    import './Header.css';
     export let showSpaceship: boolean;
+
+    import './Header.css';
 </script>
 
 <header class="header">

@@ -41,7 +41,6 @@
         }));
         showSpaceship.set(true);
     }
-
     function closeModal() {
         isModalVisible = false;
         goto('/');
