@@ -6,7 +6,17 @@
     @apply relative flex flex-col items-center justify-center gap-5 w-full h-60 bg-gradient-to-r from-cyan-500 to-blue-500 text-white overflow-hidden;
 }
 
-.header__spaceship {
-    @apply absolute bottom-[-250px] left-1/2 -translate-x-1/2 w-[100px] animate-fly;
-}
-
+@keyframes fly {
+    0% {
+      transform: translateY(-250px);
+    }
+    100% {
+      transform: translateY(100%);  
+    }
+  }
+  
+  .header__spaceship {
+    @apply absolute left-1/2 -translate-x-1/2 w-[100px];
+    animation: fly 2s ease-in 0.5s forwards;
+  }
+  

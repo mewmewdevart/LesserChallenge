@@ -1,0 +1,59 @@
+/* Challenge */
+.challenge {
+    @apply flex flex-col justify-center items-center p-4 bg-white w-full;
+}
+
+.challenge__timer-label {
+    @apply text-lg;
+}
+
+.challenge__indicator {
+    @apply mt-4 absolute right-8 top-4;
+}
+
+.challenge__indicator-badge {
+    @apply indicator-item badge bg-custom-orange border-none absolute -right-2 -top-2;
+}
+
+
+.challenge__indicator-button {
+    @apply btn  text-center rounded-lg bg-white text-custom-blue border-custom-blue transition-colors hover:bg-custom-blue hover:text-white disabled:opacity-95 disabled:cursor-none;
+}
+
+
+.challenge__title {
+    @apply text-2xl font-bold my-2;
+}
+
+/* Form */
+.challenge__form {
+    @apply space-y-4 w-full max-w-md;
+}
+
+.challenge__form-group {
+    @apply relative mb-4;
+}
+
+.challenge__form-icon {
+    @apply absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none;
+}
+
+.challenge__form-icon img {
+    @apply w-5 h-5;
+}
+
+.challenge__form-input {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-custom-blue focus:border-custom-blue block w-full ps-10 p-2.5;
+}
+
+.challenge__form-actions {
+    @apply flex justify-between gap-2;
+}
+
+.challenge__form-button--restart {
+    @apply flex-grow btn text-center text-white bg-custom-blue border border-custom-blue rounded-lg transition-colors hover:bg-transparent hover:text-blue-500;
+}
+
+.challenge__form-button--submit {
+    @apply flex-grow btn bg-transparent text-custom-blue border-custom-blue hover:bg-custom-blue hover:text-white;
+}

@@ -10,6 +10,7 @@
     import Timer from '$components/Timer/Timer.svelte';
     import Modal from '$components/Modal/Modal.svelte';
 
+    import './page.css'
 
     let candidateName: string = '';
     let candidatePhone: string = '';
