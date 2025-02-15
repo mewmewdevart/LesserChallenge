@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-vercel';
 import { sveltePreprocess } from 'svelte-preprocess';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
@@ -9,9 +9,7 @@ const config = {
         vitePreprocess()
     ],
     kit: {
-        adapter: adapter({
-            fallback: 'index.html'
-        }),
+        adapter: adapter(),
         alias: {
             $lib: './src/lib', 
             $routes: './src/routes',
