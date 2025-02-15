@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
 
 export const INITIAL_COUNTDOWN = 15;
+export const showSpaceship = writable(false);
 
 export interface Candidate {
     name: string;

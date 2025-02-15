@@ -1,21 +1,23 @@
 .header {
-  @apply w-full;
+    @apply w-full;
 }
 
 .header__container {
-  @apply relative flex flex-col items-center justify-center gap-5 w-full h-60 bg-gradient-to-r from-cyan-500 to-blue-500 text-white overflow-hidden;
-}
-
-@keyframes fly {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    transform: translateY(-250px);
-  }
+    @apply relative flex flex-col items-center justify-center gap-5 w-full h-60 bg-gradient-to-r from-cyan-500 to-blue-500 text-white overflow-hidden;
 }
 
 .header__spaceship {
-  @apply absolute left-1/2 -translate-x-1/2 w-[100px] bottom-0 transform translate-y-full;
-  animation: fly 2s ease-in 0.5s forwards;
+    @apply absolute text-center w-[100px] bottom-0 text-[175px];
+    transform: translateY(150%) rotate(-45deg);
+    animation: fly 2s ease-in .5s forwards
+}
+
+@keyframes fly {
+    0% {
+        transform: translateY(150%) rotate(-45deg)
+    }
+
+    100% {
+        transform: translateY(-250px) rotate(-45deg)
+    }
 }

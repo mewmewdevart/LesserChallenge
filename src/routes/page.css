@@ -53,3 +53,7 @@
 .challenge__form-button--submit {
     @apply flex-grow btn bg-transparent text-custom-blue border-custom-blue hover:bg-custom-blue hover:text-white;
 }
+
+.challenge__form-warning {
+    margin-left: 2.5rem; /* Adjust this value if needed */
+}
