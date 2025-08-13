@@ -1,5 +1,5 @@
 <h1 align="center">
-  Lesser Form Countdown (Em desenvolvimento)
+  Lesser Form Countdown Challenge
 </h1>
 
 <p align="center">
@@ -9,10 +9,24 @@
 </p>
 
 <p align="center">
-    <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/mewmewdevart/LesserFormCountdown?color=054DFC" />
-    <img alt="Main language" src="https://img.shields.io/github/languages/top/mewmewdevart/LesserFormCountdown?color=054DFC"/>
-    <img alt="License" src="https://img.shields.io/github/license/mewmewdevart/LesserFormCountdown?color=054DFC"/>
+    <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/mewmewdevart/LesserChallenge?color=054DFC" />
+    <img alt="Main language" src="https://img.shields.io/github/languages/top/mewmewdevart/LesserChallenge?color=054DFC"/>
+    <img alt="License" src="https://img.shields.io/github/license/mewmewdevart/LesserChallenge?color=054DFC"/>
 </p>
+
+> [!WARNING]
+> Este projeto foi desenvolvido como parte do desafio técnico para a vaga de **Desenvolvedora JavaScript Júnior** na **Lesser**.
+>
+> **Aviso sobre o Processo Seletivo:**
+>
+> O desafio técnico foi realizado diretamente na plataforma da empresa, ao longo de alguns dias, até a conclusão total da aplicação solicitada. Após a entrega, aguardei semanas sem receber qualquer retorno ou atualização sobre a avaliação.
+>
+> Diante da ausência de comunicação, entrei em contato pelo WhatsApp profissional da empresa. A atendente me encaminhou ao responsável de TI, que informou que o processo seletivo já estava encerrado **antes mesmo de eu iniciar o desafio**, mas que a página com o teste havia permanecido ativa por descuido. Como consequência, todo o esforço e tempo investidos foram invalidados.
+>
+> Solicitei, ao menos, um feedback técnico sobre a solução desenvolvida. Foi-me prometido retorno na mesma semana, mas isso não ocorreu (estou aguardando até hoje o feedback).
+>
+> A falta de atualização no status da vaga e a ausência de retorno após a entrega do desafio evidenciam falhas significativas na condução do processo seletivo. Por esse motivo, não recomendo a participação em processos da Lesser, considerando o risco de dedicação sem qualquer aproveitamento ou reconhecimento.
+
 
 <p align="center">
     <a href="#" target="_blank">Acesse o Site</a> 
